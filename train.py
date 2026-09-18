@@ -21,7 +21,7 @@ def solve_sdof_eqwave_freq(omg, zeta, ag, dt):
     Omg = 2.0 * torch.pi * f  # Circular frequency points
     H_u = -1.0 / (omg**2 - Omg**2 + 2.0 * zeta * omg * Omg * 1.0j)
     u = torch.fft.ifft(af * H_u, Nfft).real[:, :n]
-    v = torch.fft.ifft(af * Omg * H_u, Nfft).real[:, :n]
+    v = torch.fft.ifft(af * 1.0j * Omg * H_u, Nfft).real[:, :n]
 
     return u, v
 
